@@ -53,6 +53,6 @@ class TelegramBot:
 # Initialize Telegram Bot with your credentials
 # Replace with your actual bot token and chat ID
 telegram_bot = TelegramBot(
-    bot_token="8249485043:AAHMm0kul_8W_L--4U2SHZjaSv79fGO2-B4",
-    chat_id="5119966072"
+    bot_token="your token",
+    chat_id="your chat id"
 )
