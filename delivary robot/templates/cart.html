@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-shopping-cart"></i> Shopping Cart</h2>
+                <div class="wallet-info">
+                    <span class="badge bg-success fs-6">
+                        <i class="fas fa-wallet"></i> Wallet: ₹{{ "%.2f"|format(user.wallet_balance) }}
+                    </span>
+                </div>
+            </div>
+
+            {% if cart_items %}
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>PIN Code</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart_items %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ url_for('static', filename='images/' + item.image_path) }}" 
+                                                 class="img-thumbnail me-3" 
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 onerror="this.src='https://via.placeholder.com/60?text={{ item.name }}'">
+                                            <div>
+                                                <h6 class="mb-0">{{ item.name }}</h6>
+                                                <small class="text-muted">RFID: {{ item.rfid_number }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="fw-bold text-success">₹{{ "%.2f"|format(item.price) }}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="badge bg-primary fs-6">{{ item.pin_code }}</span>
+                                        <br>
+                                        <small class="text-muted">Sent to delivery team</small>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url_for('remove_from_cart', cart_id=item.id) }}" 
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Remove {{ item.name }} from cart?')">
+                                            <i class="fas fa-trash"></i> Remove
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-info-circle"></i> Delivery Instructions</h6>
+                                    <p class="small mb-0">
+                                        1. Wait for delivery robot<br>
+                                        2. Enter the PIN code when prompted<br>
+                                        3. Collect your item after verification
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="total-section">
+                                <h4>Total: ₹{{ "%.2f"|format(total_amount) }}</h4>
+                                <a href="{{ url_for('verify_pin') }}" class="btn btn-primary btn-lg mt-2">
+                                    <i class="fas fa-key"></i> Enter PIN to Receive Item
+                                </a>
+                                <p class="text-muted small mt-2">
+                                    You will be asked to enter PIN when item is delivered
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+                <h3>Your cart is empty</h3>
+                <p class="text-muted">Add some items to get started with your order</p>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Continue Shopping
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

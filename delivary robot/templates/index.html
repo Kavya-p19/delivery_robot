@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<header class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold">Welcome to DeliveryBot</h1>
+                <p class="lead">Smart robotic delivery system for instant stationery needs</p>
+                {% if not session.user_id %}
+                <a href="{{ url_for('register') }}" class="btn btn-light btn-lg mt-3">Get Started</a>
+                {% else %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg mt-3">Order Now</a>
+                {% endif %}
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-robot display-1"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- About Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">About DeliveryBot</h2>
+                <p class="lead">DeliveryBot is an innovative robotic delivery system that brings stationery items directly to you. Using RFID technology and automated robotics, we provide instant access to essential items.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="step-number">1</div>
+                <h4>Register & Login</h4>
+                <p>Create your account and login to access our services</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-number">2</div>
+                <h4>Add Wallet Balance</h4>
+                <p>Load money into your digital wallet for seamless transactions</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-number">3</div>
+                <h4>Select Product</h4>
+                <p>Choose from our range of stationery items</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-number">4</div>
+                <h4>Receive Delivery</h4>
+                <p>Our robot delivers your item instantly using RFID technology</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center mb-4">Contact Us</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-map-marker-alt"></i> Address</h5>
+                        <p>123 Tech Park, Innovation Road<br>Bangalore, India - 560001</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-phone"></i> Contact Info</h5>
+                        <p>Email: info@deliverybot.com<br>Phone: +91 9876543210</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
